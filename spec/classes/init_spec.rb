@@ -147,7 +147,7 @@ describe 'gitlab' do
 	  let(:params) {{:package_repo_url => 'https://mirrorhost.org/repository/packages.gitlab.com'} }
 	  it { is_expected.to contain_apt__setting('list-gitlab_official_ce').with({
 		:ensure => 'present'
-	  }).with_content(/https:\/\/mirrorhost\.org\/repository\/packages\.gitlab\.com/ }
+	  }).with_content(/https:\/\/mirrorhost\.org\/repository\/packages\.gitlab\.com/) }
 	end
     describe 'external_url' do
       let(:params) { {:external_url => 'http://gitlab.mycompany.com/'} }
