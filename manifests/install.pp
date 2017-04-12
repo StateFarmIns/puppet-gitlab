@@ -64,7 +64,7 @@ class gitlab::install {
           baseurl       => "${_repo_base_url}/el/${releasever}/\$basearch",
           enabled       => 1,
           gpgcheck      => 0,
-          gpgkey        => "${packae_repo_url}/gpg.key",
+          gpgkey        => "${package_repo_url}/gpg.key",
           repo_gpgcheck => 1,
           sslcacert     => '/etc/pki/tls/certs/ca-bundle.crt',
           sslverify     => 1,
