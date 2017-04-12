@@ -90,6 +90,15 @@ class { 'gitlab':
 
 *Note*: This works only for Gitlab version 7.11 and greater. See this blog entry: [GitLab 7.11 released with Two-factor Authentication and a publicly viewable Enterprise Edition](https://about.gitlab.com/2015/05/22/gitlab-7-11-released/)
 
+If you are behind a firewall, and wish to install from the official gitlab channel via an internally accessible mirror,
+just specify the `package_repo_url` parameter with the url to your mirror:
+
+```puppet
+class { 'gitlab':
+  external_url => 'http://gitlab.mydomain.tld',
+  package_repo_url => 'https://mymirror/repository/packages.gitlab.com',
+}
+```
 
 ## Usage
 
