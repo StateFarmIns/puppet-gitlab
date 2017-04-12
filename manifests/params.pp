@@ -10,6 +10,7 @@ class gitlab::params {
   $package_pin = false
   $manage_package_repo = true
   $manage_package = true
+  $package_repo_url = "https://packages.gitlab.com"
 
   $service_exec = '/usr/bin/gitlab-ctl'
   $service_restart = "${service_exec} restart"

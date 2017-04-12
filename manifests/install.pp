@@ -10,6 +10,9 @@ class gitlab::install {
   $package_ensure      = $::gitlab::package_ensure
   $package_name        = "gitlab-${edition}"
   $package_pin         = $::gitlab::package_pin
+  $package_repo_url    = $::gitlab::package_repo_url
+
+  $_repo_base_url = "${package_repo_url}/gitlab/gitlab-${edition}"
 
   # only do repo management when on a Debian-like system
   if $manage_package_repo {
@@ -20,12 +23,12 @@ class gitlab::install {
         $_lower_os = downcase($::operatingsystem)
         apt::source { "gitlab_official_${edition}":
           comment  => 'Official repository for Gitlab',
-          location => "https://packages.gitlab.com/gitlab/gitlab-${edition}/${_lower_os}/",
+          location => "${_repo_base_url}/${_lower_os}/",
           release  => $::lsbdistcodename,
           repos    => 'main',
           key      => {
             id     => '1A4C919DB987D435939638B914219A96E15E78F4',
-            source => 'https://packages.gitlab.com/gpg.key',
+            source => "${package_repo_url}/gpg.key",
           },
           include  => {
             src => true,
@@ -58,10 +61,10 @@ class gitlab::install {
 
         yumrepo { "gitlab_official_${edition}":
           descr         => 'Official repository for Gitlab',
-          baseurl       => "https://packages.gitlab.com/gitlab/gitlab-${edition}/el/${releasever}/\$basearch",
+          baseurl       => "${_repo_base_url}/el/${releasever}/\$basearch",
           enabled       => 1,
           gpgcheck      => 0,
-          gpgkey        => 'https://packages.gitlab.com/gpg.key',
+          gpgkey        => "${packae_repo_url}/gpg.key",
           repo_gpgcheck => 1,
           sslcacert     => '/etc/pki/tls/certs/ca-bundle.crt',
           sslverify     => 1,

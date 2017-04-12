@@ -20,6 +20,12 @@
 #   Default: true
 #   Should the GitLab package be managed?
 #
+# [*package_repo_url*]
+#   Default: "https://packages.gitlab.com"
+#   Specify a url for the gitlab packages repository
+#   Useful if you are behind a firewall and need to use a mirror
+#   or package proxy channel
+#
 # [*service_name*]
 #   Default: gitlab-runsvdir
 #   Name of the system service.
@@ -293,6 +299,7 @@ class gitlab (
   $manage_package = $::gitlab::params::manage_package,
   $package_ensure = $::gitlab::params::package_ensure,
   $package_pin = $::gitlab::params::package_pin,
+  $package_repo_url = $::gitlab::params::package_repo_url,
   # system service configuration
   $service_enable = $::gitlab::params::service_enable,
   $service_initd_ensure = $::gitlab::params::service_initd_ensure,
