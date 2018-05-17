@@ -40,6 +40,11 @@ class gitlab::config {
   $pages_external_url = $::gitlab::pages_external_url
   $pages_nginx = $::gitlab::pages_nginx
   $pages_nginx_eq_nginx = $::gitlab::pages_nginx_eq_nginx
+  $pgpass_file_ensure = $::gitlab::pgpass_file_ensure,
+  $pgpass_file_location = $::gitlab::pgpass_file_location,
+  $pgpass_file_owner = $::gitlab::pgpass_file_owner,
+  $pgpass_file_group = $::gitlab::pgpass_file_group,
+  $pgbouncer_password = $::gitlab::pgbouncer_password,
   $postgresql = $::gitlab::postgresql
   $prometheus = $::gitlab::prometheus
   $prometheus_monitoring_enable = $::gitlab::prometheus_monitoring_enable
@@ -118,6 +123,24 @@ class gitlab::config {
         group   => $service_group,
         mode    => '0600',
         content => inline_template('<%= require \'json\'; JSON.pretty_generate(@secrets) + "\n" %>'),
+    }
+  }
+
+  if ($pgpass_file_ensure == 'present'){
+    if empty($pgbouncer_password) {
+      fail("a password for pgbouncer must be given if pgpass_file_ensure is 'present")
+    }
+
+    file {$pgpass_file_location:
+      ensure  => 'present',
+      owner   => 'gitlab-consul',
+      group   => 'gitlab-consul',
+      mode    => '0600',
+      content => template('gitlab/.pgpass.erb'),
+    }
+  } else {
+    file {$pgpass_file_location:
+      ensure => 'absent',
     }
   }
 
