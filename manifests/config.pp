@@ -40,11 +40,11 @@ class gitlab::config {
   $pages_external_url = $::gitlab::pages_external_url
   $pages_nginx = $::gitlab::pages_nginx
   $pages_nginx_eq_nginx = $::gitlab::pages_nginx_eq_nginx
-  $pgpass_file_ensure = $::gitlab::pgpass_file_ensure,
-  $pgpass_file_location = $::gitlab::pgpass_file_location,
-  $pgpass_file_owner = $::gitlab::pgpass_file_owner,
-  $pgpass_file_group = $::gitlab::pgpass_file_group,
-  $pgbouncer_password = $::gitlab::pgbouncer_password,
+  $pgpass_file_ensure = $::gitlab::pgpass_file_ensure
+  $pgpass_file_location = $::gitlab::pgpass_file_location
+  $pgpass_file_owner = $::gitlab::pgpass_file_owner
+  $pgpass_file_group = $::gitlab::pgpass_file_group
+  $pgbouncer_password = $::gitlab::pgbouncer_password
   $postgresql = $::gitlab::postgresql
   $prometheus = $::gitlab::prometheus
   $prometheus_monitoring_enable = $::gitlab::prometheus_monitoring_enable
