@@ -133,8 +133,8 @@ class gitlab::config {
 
     file {$pgpass_file_location:
       ensure  => 'present',
-      owner   => 'gitlab-consul',
-      group   => 'gitlab-consul',
+      owner   => $pgpass_file_owner,
+      group   => $pgpass_file_group,
       mode    => '0600',
       content => template('gitlab/.pgpass.erb'),
     }
